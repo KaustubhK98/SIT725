@@ -13,6 +13,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 io.on('connection', (socket) => {
     console.log('User connected');
 
+    socket.on('message', (msg) => {
+        console.log('Message received', msg);
+        io.emit('message', msg);
+    }
+    );
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
